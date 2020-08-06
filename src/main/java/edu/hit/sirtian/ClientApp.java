@@ -6,12 +6,11 @@ package edu.hit.sirtian;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.Gateway;
-import org.hyperledger.fabric.gateway.Network;
-import org.hyperledger.fabric.gateway.Wallet;
-import org.hyperledger.fabric.gateway.Wallets;
+import org.hyperledger.fabric.gateway.*;
 
 public class ClientApp {
 
@@ -30,27 +29,49 @@ public class ClientApp {
 		builder.identity(wallet, "appUser").networkConfig(networkConfigPath).discovery(true);
 
 		// create a gateway connection
-		try (Gateway gateway = builder.connect()) {
+//		try (Gateway gateway = builder.connect()) {
+//
+//			// get the network and contract
+//			Network network = gateway.getNetwork("mychannel");
+//			Contract contract = network.getContract("fabcar");
+//
+//			byte[] result;
+//
+//			result = contract.evaluateTransaction("queryAllCars");
+//			System.out.println(new String(result));
+//
+//			contract.submitTransaction("createCar", "CAR10", "VW", "Polo", "Grey", "Mary");
+//
+//			result = contract.evaluateTransaction("queryCar", "CAR10");
+//			System.out.println(new String(result));
+//
+//			contract.submitTransaction("changeCarOwner", "CAR10", "Archie");
+//
+//			result = contract.evaluateTransaction("queryCar", "CAR10");
+//			System.out.println(new String(result));
+//			System.out.println("that's all folks!");
+//		}
 
-			// get the network and contract
-			Network network = gateway.getNetwork("mychannel");
-			Contract contract = network.getContract("fabcar");
 
-			byte[] result;
+		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(100,300,100,
+				TimeUnit.SECONDS,new LinkedBlockingQueue<>());
+		for(int i = 0;i < 2000;i++){
+			threadPoolExecutor.execute(()-> {
+					try (Gateway gateway = builder.connect()) {
 
-			result = contract.evaluateTransaction("queryAllCars");
-			System.out.println(new String(result));
+						// get the network and contract
+						Network network = gateway.getNetwork("mychannel");
+						Contract contract = network.getContract("fabcar");
 
-			contract.submitTransaction("createCar", "CAR10", "VW", "Polo", "Grey", "Mary");
+						byte[] result;
 
-			result = contract.evaluateTransaction("queryCar", "CAR10");
-			System.out.println(new String(result));
+						result = contract.evaluateTransaction("queryAllCars");
+						System.out.println(new String(result));
 
-			contract.submitTransaction("changeCarOwner", "CAR10", "Archie");
-
-			result = contract.evaluateTransaction("queryCar", "CAR10");
-			System.out.println(new String(result));
-			System.out.println("that's all folks!");
+					} catch (ContractException e) {
+						e.printStackTrace();
+					}
+			});
 		}
 	}
 
