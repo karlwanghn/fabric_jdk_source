@@ -6,29 +6,80 @@ client:
   connection:
     timeout:
       peer:
-        endorser: '300'
+        endorser: "300"
 organizations:
   Org${ORG}:
     mspid: Org${ORG}MSP
     peers:
-    - peer0.org${ORG}.example.com
+      - peer0.org${ORG}.example.com
+      - peer1.org${ORG}.example.com
+      - peer2.org${ORG}.example.com
+      - peer3.org${ORG}.example.com
+      - peer4.org${ORG}.example.com
+      - peer5.org${ORG}.example.com
     certificateAuthorities:
-    - ca.org${ORG}.example.com
+      - ca.org${ORG}.example.com
 peers:
   peer0.org${ORG}.example.com:
     url: grpcs://localhost:${P0PORT}
     tlsCACerts:
       pem: |
-          ${PEERPEM}
+        ${PEERPEM}
     grpcOptions:
       ssl-target-name-override: peer0.org${ORG}.example.com
       hostnameOverride: peer0.org${ORG}.example.com
+
+  peer1.org${ORG}.example.com:
+    url: grpcs://localhost:${P1PORT}
+    tlsCACerts:
+      pem: |
+        ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer1.org${ORG}.example.com
+      hostnameOverride: peer1.org${ORG}.example.com
+
+  peer2.org${ORG}.example.com:
+    url: grpcs://localhost:${P2PORT}
+    tlsCACerts:
+      pem: |
+        ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer2.org${ORG}.example.com
+      hostnameOverride: peer2.org${ORG}.example.com
+
+  peer3.org${ORG}.example.com:
+    url: grpcs://localhost:${P3PORT}
+    tlsCACerts:
+      pem: |
+        ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer3.org${ORG}.example.com
+      hostnameOverride: peer3.org${ORG}.example.com
+
+  peer4.org${ORG}.example.com:
+    url: grpcs://localhost:${P4PORT}
+    tlsCACerts:
+      pem: |
+        ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer4.org${ORG}.example.com
+      hostnameOverride: peer4.org${ORG}.example.com
+
+  peer5.org${ORG}.example.com:
+    url: grpcs://localhost:${P5PORT}
+    tlsCACerts:
+      pem: |
+        ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer5.org${ORG}.example.com
+      hostnameOverride: peer5.org${ORG}.example.com
+
 certificateAuthorities:
   ca.org${ORG}.example.com:
     url: https://localhost:${CAPORT}
     caName: ca-org${ORG}
     tlsCACerts:
-      pem: 
+      pem:
         - |
           ${CAPEM}
     httpOptions:
