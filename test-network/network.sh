@@ -352,10 +352,10 @@ function networkUp() {
     createConsortium
   fi
 
-  COMPOSE_FILES="-f ${COMPOSE_FILE_BASE}"
+  COMPOSE_FILES="-f ${COMPOSE_FILE_ORDERER} -f ${COMPOSE_FILE_ORG1} -f ${COMPOSE_FILE_ORG2}"
 
   if [ "${DATABASE}" == "couchdb" ]; then
-    COMPOSE_FILES="${COMPOSE_FILES} -f ${COMPOSE_FILE_COUCH}"
+    COMPOSE_FILES="${COMPOSE_FILES} -f ${COMPOSE_FILE_COUCH_ORG1} -f ${COMPOSE_FILE_COUCH_ORG2}"
   fi
 
   IMAGE_TAG=$IMAGETAG docker-compose ${COMPOSE_FILES} up -d 2>&1
@@ -407,7 +407,7 @@ function deployCC() {
 # Tear down running network
 function networkDown() {
   # stop org3 containers also in addition to org1 and org2, in case we were running sample to add org3
-  docker-compose -f $COMPOSE_FILE_BASE -f $COMPOSE_FILE_COUCH -f $COMPOSE_FILE_CA down --volumes --remove-orphans
+  docker-compose -f $COMPOSE_FILE_ORDERER -f $COMPOSE_FILE_ORG1 -f $COMPOSE_FILE_ORG2 -f $COMPOSE_FILE_COUCH_ORG1 -f $COMPOSE_FILE_COUCH_ORG2 down --volumes --remove-orphans
   docker-compose -f $COMPOSE_FILE_COUCH_ORG3 -f $COMPOSE_FILE_ORG3 down --volumes --remove-orphans
   # Don't remove the generated artifacts -- note, the ledgers are always removed
   if [ "$MODE" != "restart" ]; then
@@ -452,9 +452,17 @@ CC_COLL_CONFIG="NA"
 # chaincode init function defaults to "NA"
 CC_INIT_FCN="NA"
 # use this as the default docker-compose yaml definition
-COMPOSE_FILE_BASE=docker/docker-compose-test-net.yaml
+
+COMPOSE_FILE_ORDERER=docker/docker-compose-order.yaml
+COMPOSE_FILE_ORG1=docker/docker-compose-org1.yaml
+COMPOSE_FILE_ORG2=docker/docker-compose-org2.yaml
 # docker-compose.yaml file if you are using couchdb
 COMPOSE_FILE_COUCH=docker/docker-compose-couch.yaml
+
+COMPOSE_FILE_COUCH_ORG1=docker/docker-compose-couch-org1.yaml
+
+COMPOSE_FILE_COUCH_ORG2=docker/docker-compose-couch-org2.yaml
+
 # certificate authorities compose file
 COMPOSE_FILE_CA=docker/docker-compose-ca.yaml
 # use this as the docker compose couch file for org3
