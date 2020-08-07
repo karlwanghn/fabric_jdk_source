@@ -51,7 +51,7 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
-      - 13051:9051
+      - 27051:9051
     networks:
       - test
 
@@ -89,7 +89,7 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
-      - 14051:9051
+      - 28051:9051
     networks:
       - test
 
@@ -127,7 +127,7 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
-      - 15051:9051
+      - 29051:9051
     networks:
       - test
 
@@ -165,7 +165,7 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
-      - 16051:9051
+      - 30051:9051
     networks:
       - test
 
@@ -203,7 +203,7 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
-      - 17051:9051
+      - 31051:9051
     networks:
       - test
 
@@ -241,6 +241,6 @@ services:
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: peer node start
     ports:
-      - 18051:9051
+      - 32051:9051
     networks:
       - test
