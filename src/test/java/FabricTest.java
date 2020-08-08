@@ -8,6 +8,7 @@ public class FabricTest {
     public void testFabric() throws Exception {
         EnrollAdmin.main(null);
         RegisterUser.main(null);
+        System.out.println("now start threads to test!");
         ClientApp.main(null);
     }
 }

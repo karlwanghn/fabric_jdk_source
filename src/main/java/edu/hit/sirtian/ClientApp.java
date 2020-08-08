@@ -6,9 +6,7 @@ package edu.hit.sirtian;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import org.hyperledger.fabric.gateway.*;
 
@@ -53,26 +51,34 @@ public class ClientApp {
 //		}
 
 
-		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(100,300,100,
-				TimeUnit.SECONDS,new LinkedBlockingQueue<>());
-		for(int i = 0;i < 2000;i++){
-			threadPoolExecutor.execute(()-> {
-					try (Gateway gateway = builder.connect()) {
+		System.out.println("create threads ++++++++++++++++++");
+		int  threadCount = 10;
+		CountDownLatch countDownLatch = new CountDownLatch(threadCount);
+		for(int i = 0;i < threadCount;i++){
+			new Thread(()-> {
+				Gateway gateway = builder.connect();
+				// get the network and contract
+				Network network = gateway.getNetwork("mychannel");
+				Contract contract = network.getContract("fabcar");
 
-						// get the network and contract
-						Network network = gateway.getNetwork("mychannel");
-						Contract contract = network.getContract("fabcar");
-
-						byte[] result;
-
-						result = contract.evaluateTransaction("queryAllCars");
-						System.out.println(new String(result));
-
-					} catch (ContractException e) {
-						e.printStackTrace();
-					}
-			});
+				byte[] result;
+				try {
+					contract.submitTransaction("createCar", "CAR10", "VW", "Polo", "Grey", "Mary");
+					result = contract.evaluateTransaction("queryAllCars");
+					System.out.println(new String(result));
+				} catch (ContractException e) {
+					e.printStackTrace();
+				} catch (TimeoutException e) {
+					e.printStackTrace();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				countDownLatch.countDown();
+			}).start();
 		}
+
+		countDownLatch.await();
+		System.out.println("finished =====================");
 	}
 
 }
