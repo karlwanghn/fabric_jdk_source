@@ -14,7 +14,7 @@ PeerOrgs:
     Domain: org3.example.com
     EnableNodeOUs: true
     Template:
-      Count: 1
+      Count: 6
       SANS:
         - localhost
     Users:

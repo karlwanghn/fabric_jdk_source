@@ -39,7 +39,7 @@ fetchChannelConfig() {
 
   echo "Fetching the most recent configuration block for the channel"
   set -x
-  peer channel fetch config config_block.pb -o orderer.example.com:7050 --ordererTLSHostnameOverride orderer.example.com -c $CHANNEL --tls --cafile $ORDERER_CA
+  peer channel fetch config config_block.pb -o orderer0.example.com:7050 --ordererTLSHostnameOverride orderer0.example.com -c $CHANNEL --tls --cafile $ORDERER_CA
   set +x
 
   echo "Decoding config block to JSON and isolating config to ${OUTPUT}"
@@ -106,7 +106,8 @@ echo "========= Submitting transaction from a different peer (peer0.org2) which 
 echo
 setGlobals 2
 set -x
-peer channel update -f org3_update_in_envelope.pb -c ${CHANNEL_NAME} -o orderer.example.com:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile ${ORDERER_CA}
+peer channel update -f org3_update_in_envelope.pb -c ${CHANNEL_NAME} -o orderer0.example.com:7050             \
+--ordererTLSHostnameOverride orderer0.example.com --tls --cafile ${ORDERER_CA}
 set +x
 
 echo
