@@ -41,7 +41,7 @@ services:
       - CORE_PEER_LISTENADDRESS=0.0.0.0:11051
       - CORE_PEER_CHAINCODEADDRESS=peer0.org3.example.com:11052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.example.com:11051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.example.com:11051  peer1.org3.example.com:11051 peer2.org3.example.com:11051 peer3.org3.example.com:11051 peer4.org3.example.com:11051 peer5.org3.example.com:11051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org3.example.com:11051
       - CORE_PEER_LOCALMSPID=Org3MSP
     volumes:
@@ -78,7 +78,7 @@ services:
       - CORE_PEER_LISTENADDRESS=0.0.0.0:11051
       - CORE_PEER_CHAINCODEADDRESS=peer1.org3.example.com:11052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org3.example.com:11051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.example.com:11051  peer1.org3.example.com:11051 peer2.org3.example.com:11051 peer3.org3.example.com:11051 peer4.org3.example.com:11051 peer5.org3.example.com:11051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org3.example.com:11051
       - CORE_PEER_LOCALMSPID=Org3MSP
     volumes:
@@ -116,7 +116,7 @@ services:
       - CORE_PEER_LISTENADDRESS=0.0.0.0:11051
       - CORE_PEER_CHAINCODEADDRESS=peer2.org3.example.com:11052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer2.org3.example.com:11051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.example.com:11051  peer1.org3.example.com:11051 peer2.org3.example.com:11051 peer3.org3.example.com:11051 peer4.org3.example.com:11051 peer5.org3.example.com:11051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer2.org3.example.com:11051
       - CORE_PEER_LOCALMSPID=Org3MSP
     volumes:
@@ -154,7 +154,7 @@ services:
       - CORE_PEER_LISTENADDRESS=0.0.0.0:11051
       - CORE_PEER_CHAINCODEADDRESS=peer3.org3.example.com:11052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer3.org3.example.com:11051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.example.com:11051  peer1.org3.example.com:11051 peer2.org3.example.com:11051 peer3.org3.example.com:11051 peer4.org3.example.com:11051 peer5.org3.example.com:11051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer3.org3.example.com:11051
       - CORE_PEER_LOCALMSPID=Org3MSP
     volumes:
@@ -192,7 +192,7 @@ services:
       - CORE_PEER_LISTENADDRESS=0.0.0.0:11051
       - CORE_PEER_CHAINCODEADDRESS=peer4.org3.example.com:11052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer4.org3.example.com:11051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.example.com:11051  peer1.org3.example.com:11051 peer2.org3.example.com:11051 peer3.org3.example.com:11051 peer4.org3.example.com:11051 peer5.org3.example.com:11051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer4.org3.example.com:11051
       - CORE_PEER_LOCALMSPID=Org3MSP
     volumes:
@@ -230,7 +230,7 @@ services:
       - CORE_PEER_LISTENADDRESS=0.0.0.0:11051
       - CORE_PEER_CHAINCODEADDRESS=peer5.org3.example.com:11052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:11052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer5.org3.example.com:11051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org3.example.com:11051  peer1.org3.example.com:11051 peer2.org3.example.com:11051 peer3.org3.example.com:11051 peer4.org3.example.com:11051 peer5.org3.example.com:11051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer5.org3.example.com:11051
       - CORE_PEER_LOCALMSPID=Org3MSP
     volumes:
